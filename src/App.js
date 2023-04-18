@@ -10,6 +10,7 @@ import { Account } from "./pages/account/Account"
 import { Create } from "./pages/create/Create"
 import {Post} from './pages/post/Post'
 import {Service} from './pages/services/Service'
+import {Qoute} from './pages/qoute/Qoute'
 
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
           <Route exact path='/create/blog' component={Create} />
           <Route exact path ='/blog' component={Post}/>
           <Route exact path ='/services' component={Service}/>
+          <Route exact path ='/qoute' component={Qoute}/>   
         </Switch>
         <Footer />
       </Router>
