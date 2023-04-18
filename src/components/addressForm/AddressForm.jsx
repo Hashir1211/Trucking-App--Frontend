@@ -11,11 +11,7 @@ import Select from '@mui/material/Select';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 
-const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker'
-  ];
+const services =['Full-service moving company', 'Hourly moving & packing services' , 'Junk Removal & Trash Pickup'];
 
   const validationSchema = yup.object({
     firstName: yup
@@ -69,12 +65,7 @@ export default function AddressForm() {
           alert(JSON.stringify(values, null, 2));
         },
       });
-  const [personName, setPersonName] = React.useState('');
-  const handleChange = (event) => {
-    console.log(event)
-    const {target: { value }} = event;
-    setPersonName(value);
-  };
+
 
   return (
     <>
@@ -119,7 +110,6 @@ export default function AddressForm() {
             name="email"
             label="Email"
             fullWidth
-            autoComplete="shipping address-line1"
             variant="outlined"
             value={formik.values.email}
             onChange={formik.handleChange}
@@ -133,17 +123,16 @@ export default function AddressForm() {
         <InputLabel id="demo-multiple-name-label">Service</InputLabel>
         <Select
           id="service"
+          name='service'
           value={formik.values.service}
           onChange={formik.handleChange}
           error={formik.touched.service && Boolean(formik.errors.service)}
-          helperText={formik.touched.service && formik.errors.service}
+          helpertext={formik.touched.service && formik.errors.service}
           input={<OutlinedInput label="Service" />
         
         }
-        
-         
         >
-          {names.map((name) => (
+          {services.map((name) => (
             <MenuItem
               key={name}
               value={name}
@@ -180,7 +169,7 @@ export default function AddressForm() {
             value={formik.values.city}
             onChange={formik.handleChange}
             error={formik.touched.city && Boolean(formik.errors.city)}
-            helperText={formik.touched.city && formik.errors.city}
+            helpertext={formik.touched.city && formik.errors.city}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
