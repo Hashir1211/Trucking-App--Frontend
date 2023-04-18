@@ -8,7 +8,10 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import { DetailsPages } from "./pages/details/DetailsPages"
 import { Account } from "./pages/account/Account"
 import { Create } from "./pages/create/Create"
-import { Category } from "./components/category/Category"
+import {Post} from './pages/post/Post'
+import {Service} from './pages/services/Service'
+
+
 const App = () => {
   return (
     <>
@@ -20,7 +23,9 @@ const App = () => {
           <Route exact path='/register' component={Regsiter} />
           <Route exact path='/details/:id' component={DetailsPages} />
           <Route exact path='/account' component={Account} />
-          <Route exact path='/create' component={Create} />
+          <Route exact path='/create/blog' component={Create} />
+          <Route exact path ='/blog' component={Post}/>
+          <Route exact path ='/services' component={Service}/>
         </Switch>
         <Footer />
       </Router>

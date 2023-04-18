@@ -5,9 +5,7 @@ import { Category } from "../../components/category/Category"
 export const Home = () => {
   return (
     <>
-      {/*  <Slider />*/}
-      {/* <Category /> */}
-      <Card />
+     
     </>
   )
 }

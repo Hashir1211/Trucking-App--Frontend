@@ -5,25 +5,20 @@ export const nav = [
     url: "/",
   },
   {
-    id: 2,
-    text: "about",
-    url: "/about",
-  },
-  {
     id: 3,
-    text: "pages",
-    url: "/pages",
-  },
-  {
-    id: 4,
     text: "blog",
     url: "/blog",
   },
   {
-    id: 5,
+    id: 4,
     text: "Get A Qoute",                // todo Get a qoute for customer and Tickets for Admin and Empo
     url: "/qoute",
   },
+  {
+    id : 5, 
+    text: "Services",
+    url: "/services",
+  }
 ]
 export const category = [
   {
