@@ -39,9 +39,8 @@ export const Login = () => {
               <h1>My account</h1>
             </div>
           </div>
-      <form onSubmit={formik.handleSubmit}>
+      <form className='form' onSubmit={formik.handleSubmit}>
          <TextField
-         
           id="email"
           name="email"
           label="Email"

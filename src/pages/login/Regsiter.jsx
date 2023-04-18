@@ -50,7 +50,7 @@ export const Regsiter = () => {
             </div>
           </div>
 
-          <form onSubmit={formik.handleSubmit}>
+          <form  className='form' onSubmit={formik.handleSubmit}>
             <TextField
               fullWidth
               id="name"

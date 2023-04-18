@@ -60,7 +60,7 @@ form,
   padding: 20px;
   background: #fff;
 }
-form {
+.form {
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -74,7 +74,7 @@ form span {
 form textarea,
 .accountInfo .right input,
 form input {
-  border: 1px solid #212121;
+  /* border: 1px solid #212121;
   border-radius: 6px;
   color: #212121;
   font-size: 15px;
@@ -82,7 +82,7 @@ form input {
   padding: 0 20px;
   transition: border-color 0.2s ease;
   width: 100%;
-  margin-bottom: 30px;
+  margin-bottom: 30px; */
 }
 .button {
   background: #212121;
@@ -125,4 +125,9 @@ footer .icon {
 }
 .link {
   color: #000;
+}
+
+.qouteForm{
+  color: #000;
+  
 }
