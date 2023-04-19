@@ -12,11 +12,10 @@ import Container from '@mui/material/Container';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-
 import {setUser} from '../../redux/slice/userSlice'
-
 import { useDispatch } from 'react-redux';
 
+import { useHistory } from "react-router-dom";
 
 const validationSchema = yup.object({
   email: yup
@@ -31,6 +30,7 @@ const validationSchema = yup.object({
 });
 
 export function Login() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -42,6 +42,7 @@ export function Login() {
       const {data} = await axios.post('/login', values)
       localStorage.setItem('data',JSON.stringify(data))
       dispatch(setUser(data))
+      history.push('/')
     },
   });
 

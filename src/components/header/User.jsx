@@ -13,7 +13,6 @@ export const User = () => {
     setProfileOpen(false)
   }
 
-  console.log(user?.currentUser)
  
   
   return (

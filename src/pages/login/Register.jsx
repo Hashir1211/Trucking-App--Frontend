@@ -11,6 +11,7 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useState } from 'react';
+import { useHistory } from "react-router-dom";
 
 const validationSchema = yup.object({
   firstName: yup
@@ -35,6 +36,7 @@ const validationSchema = yup.object({
 
 
 export function Register() {
+  const history = useHistory()
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -46,7 +48,15 @@ export function Register() {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       const body = {...values , name: values.firstName +" "+ values.lastName}
-      const {data}= await axios.post('/signup',body);
+      try{
+        const {data}= await axios.post('/signup',body);
+        history.push('/login')
+      }
+      catch (e){
+        console.log(e)
+      }
+    
+
     },
   });
 
