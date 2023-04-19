@@ -5,14 +5,25 @@ import { Link } from "react-router-dom"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocalStorage } from "../../hooks/useLocalStorage"
+import { setUser } from "../../redux/slice/userSlice"
+
+import { useHistory } from "react-router-dom";
 
 export const User = () => {
+  const history = useHistory()
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [profileOpen, setProfileOpen] = useState(false)
+
   const close = () => {
     setProfileOpen(false)
   }
 
+  const handleLogOut=(e)=>{
+   dispatch(setUser(null))
+   localStorage.removeItem('data');
+   history.push('/home')
+  }
  
   
   return (
@@ -31,7 +42,7 @@ export const User = () => {
                       <img src='https://images.pexels.com/photos/1097456/pexels-photo-1097456.jpeg?auto=compress&cs=tinysrgb&w=600' alt='' />
                     </div>
                     <div className='text'>
-                      <h4>{user.name}</h4>
+                      <h4>{user?.currentUser.name}</h4>
                     </div>
                   </div>
                 </Link>
@@ -47,7 +58,7 @@ export const User = () => {
                     <h4>Manage Tickets</h4>
                   </button>
                 </Link>
-                <button className='box' >
+                <button className='box' onClick={handleLogOut} >
                   <BiLogOut className='icon' />
                   <h4>Log Out</h4>
                 </button>
@@ -55,7 +66,7 @@ export const User = () => {
             )}
           </>
         ) : (
-          <button >Login</button>
+          <Link to='/login'><button className='box'> <IoSettingsOutline className='icon' /><h4>Login</h4> </button></Link>
         )}
       </div>
     </>
