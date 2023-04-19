@@ -1,10 +1,17 @@
-import React from "react"
-import "./login.css"
-import back from "../../assets/images/my-account.jpg"
-import { useFormik } from 'formik';
-import * as yup from 'yup';
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import { Link } from "react-router-dom"
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 const validationSchema = yup.object({
   email: yup
@@ -15,63 +22,90 @@ const validationSchema = yup.object({
     .string('Enter your password')
     .min(8, 'Password should be of minimum 8 characters length')
     .required('Password is required'),
+
 });
-export const Login = () => {
+
+export function Login() {
   const formik = useFormik({
     initialValues: {
-      email: 'foobar@example.com',
-      password: 'foobar',
+      email: '',
+      password: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
     },
   });
-  
+
   return (
-    <>
-      <section className='login'>
-        <div className='container'>
-          <div className='backImg'>
-            <img src={back} alt='' />
-            <div className='text'>
-              <h3>Login</h3>
-              <h1>My account</h1>
-            </div>
-          </div>
-      <form className='form' onSubmit={formik.handleSubmit}>
-         <TextField
-          id="email"
-          name="email"
-          label="Email"
-          value={formik.values.email}
-          onChange={formik.handleChange}
-          error={formik.touched.email && Boolean(formik.errors.email)}
-          helperText={formik.touched.email && formik.errors.email}
-          margin= 'normal'
-          size='small'
-        />
-        <TextField
+    
+      <Container component="main" maxWidth="xs" sx={{
+        mb: 10
+      }}>
+       
+        <Box
           sx={{
-            pb: 8
-            }}
-          id="password"
-          name="password"
-          label="Password"
-          type="password"
-          value={formik.values.password}
-          onChange={formik.handleChange}
-          error={formik.touched.password && Boolean(formik.errors.password)}
-          helperText={formik.touched.password && formik.errors.password}
-          margin= 'normal'
-          size='small'
-        />
-        <Button color="primary" variant="contained" fullWidth type="submit">
-          Login
-        </Button>
-      </form>
-        </div>
-      </section>
-    </>
-  )
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box  component="form"   onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
+            <TextField
+              fullWidth
+              id="email"
+              name="email"
+              label="Email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              error={formik.touched.email && Boolean(formik.errors.email)}
+              helperText={formik.touched.email && formik.errors.email}
+              margin='normal'
+              size='small'
+            />
+            <TextField
+              fullWidth
+              id="password"
+              name="password"
+              label="Password"
+              type="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+              margin='normal'
+              size='small'
+            />
+             <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+          <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+                Sign In
+            </Button>
+            <Grid container>
+              <Grid item>
+                <Link to="/register" >
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+       
+        </Box>
+      
+      </Container>
+  
+  );
 }
