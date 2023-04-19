@@ -11,7 +11,7 @@ axios.interceptors.request.use(
     return config;
   },
   function (error) {
-    // Do something with the request error
+    console.log(error)
     return Promise.reject(error);
   }
 );
@@ -24,6 +24,7 @@ axios.interceptors.response.use(
   },
   function (error) {
     // Do something with the response error
+    console.log(error)
     return Promise.reject(error);
   }
 );

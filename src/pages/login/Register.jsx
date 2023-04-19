@@ -54,8 +54,6 @@ export function Register() {
       catch (e){
         console.log(e)
       }
-    
-
     },
   });
 
