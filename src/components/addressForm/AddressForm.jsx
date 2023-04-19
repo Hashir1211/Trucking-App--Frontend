@@ -2,7 +2,7 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
-
+import { useHistory } from "react-router-dom";
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,7 +10,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-
+import axios from 'axios';
 const services =['Full-service moving company', 'Hourly moving & packing services' , 'Junk Removal & Trash Pickup'];
 
   const validationSchema = yup.object({
@@ -49,6 +49,7 @@ const services =['Full-service moving company', 'Hourly moving & packing service
   });
 
 export default function AddressForm() {
+  const history = useHistory();
     const formik = useFormik({
         initialValues: {
           firstName: '',
@@ -61,10 +62,23 @@ export default function AddressForm() {
           zip: '',
         },
         validationSchema: validationSchema,
-        onSubmit: (values) => {
-          alert(JSON.stringify(values, null, 2));
+        onSubmit: async (values) => {
+        const body = {...values , name: values.firstName + " " + values.lastName}
+        try{
+          const {data} = await axios.post('/qoutes/create' , body);
+          history.push("/home");
+        }
+        catch(e){
+          console.log(e);
+        }
         },
       });
+
+      const handleTextChange = (event) => {
+        const fieldName = event.target.name;
+        const trimmedValue = event.target.value.trim();
+        formik.setFieldValue(fieldName, trimmedValue);
+      };
 
 
   return (
@@ -80,11 +94,9 @@ export default function AddressForm() {
             autoComplete="given-name"
             variant="outlined"
             value={formik.values.firstName}
-            onChange={formik.handleChange}
+            onChange={handleTextChange}
             error={formik.touched.firstName && Boolean(formik.errors.firstName)}
             helperText={formik.touched.firstName && formik.errors.firstName}
-         
-            
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -97,10 +109,9 @@ export default function AddressForm() {
             autoComplete="family-name"
             variant="outlined"
             value={formik.values.lastName}
-            onChange={formik.handleChange}
+            onChange={handleTextChange}
             error={formik.touched.lastName && Boolean(formik.errors.lastName)}
             helperText={formik.touched.lastName && formik.errors.lastName}
-           
           />
         </Grid>
         <Grid item xxs={12} sm={6}>
@@ -112,7 +123,7 @@ export default function AddressForm() {
             fullWidth
             variant="outlined"
             value={formik.values.email}
-            onChange={formik.handleChange}
+            onChange={handleTextChange}
             error={formik.touched.email && Boolean(formik.errors.email)}
             helperText={formik.touched.email && formik.errors.email}
            
@@ -187,7 +198,6 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-           
             id="zip"
             name="zip"
             label="Zip / Postal code"
@@ -196,7 +206,7 @@ export default function AddressForm() {
             variant="outlined"
             size='small'
             value={formik.values.zip}
-            onChange={formik.handleChange}
+            onChange={handleTextChange}
             error={formik.touched.zip && Boolean(formik.errors.zip)}
             helperText={formik.touched.zip && formik.errors.zip}
           />

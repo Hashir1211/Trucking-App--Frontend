@@ -12,6 +12,7 @@ import {Post} from './pages/post/Post'
 import {Service} from './pages/services/Service'
 import {Qoute} from './pages/qoute/Qoute'
 
+import './config/axios'
 
 const App = () => {
   return (

@@ -7,9 +7,10 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-
+import axios from 'axios';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { useState } from 'react';
 
 const validationSchema = yup.object({
   firstName: yup
@@ -26,7 +27,7 @@ const validationSchema = yup.object({
     .string('Enter your password')
     .min(8, 'Password should be of minimum 8 characters length')
     .required('Password is required'),
-  contactNumber: yup
+  phoneNumber: yup
     .number('Enter your contact Number')
     .min(10, 'contact Number should be of minimum 8 characters length')
     .required('contact Number is required'),
@@ -34,20 +35,27 @@ const validationSchema = yup.object({
 
 
 export function Register() {
- 
   const formik = useFormik({
     initialValues: {
       firstName: '',
       lastName: '',
       email: '',
       password: '',
-      contactNumber: '',
+      phoneNumber: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      const body = {...values , name: values.firstName +" "+ values.lastName}
+      const {data}= await axios.post('/signup',body);
     },
   });
+
+  const handleTextChange = (event) => {
+    const fieldName = event.target.name;
+    const trimmedValue = event.target.value.trim();
+    formik.setFieldValue(fieldName, trimmedValue);
+  };
+
 
   return (
    
@@ -69,7 +77,7 @@ export function Register() {
           </Typography>
           <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12} sm={6}> 
                 <TextField
                   name="firstName"
                   fullWidth
@@ -77,7 +85,7 @@ export function Register() {
                   label="First Name"
                   autoFocus
                   value={formik.values.firstName}
-                  onChange={formik.handleChange}
+                  onChange={handleTextChange}
                   error={formik.touched.firstName && Boolean(formik.errors.firstName)}
                   helperText={formik.touched.firstName && formik.errors.firstName}
                 />
@@ -91,7 +99,7 @@ export function Register() {
                   name="lastName"
                   autoComplete="family-name"
                   value={formik.values.lastName}
-                  onChange={formik.handleChange}
+                  onChange={handleTextChange}
                   error={formik.touched.lastName && Boolean(formik.errors.lastName)}
                   helperText={formik.touched.lastName && formik.errors.lastName}
                 />
@@ -105,7 +113,7 @@ export function Register() {
                   name="email"
                   autoComplete="email"
                   value={formik.values.email}
-                  onChange={formik.handleChange}
+                  onChange={handleTextChange}
                   error={formik.touched.email && Boolean(formik.errors.email)}
                   helperText={formik.touched.email && formik.errors.email}
                 />
@@ -127,15 +135,15 @@ export function Register() {
               <Grid item xs={12}>
                 <TextField
                   fullWidth
-                  name="contactNumber"
+                  name="phoneNumber"
                   label="Contact"
                   type="text"
-                  id="contactNumber"
-                  autoComplete="contactNumber"
-                  value={formik.values.contactNumber}
-                  onChange={formik.handleChange}
-                  error={formik.touched.contactNumber && Boolean(formik.errors.contactNumber)}
-                  helperText={formik.touched.contactNumber && formik.errors.contactNumber}
+                  id="phoneNumber"
+                  autoComplete="phoneNumber"
+                  value={formik.values.phoneNumber}
+                  onChange={handleTextChange}
+                  error={formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)}
+                  helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
                 />
               </Grid>
             </Grid>

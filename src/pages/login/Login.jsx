@@ -9,9 +9,14 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-
+import axios from 'axios';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+
+import {setUser} from '../../redux/slice/userSlice'
+
+import { useDispatch } from 'react-redux';
+
 
 const validationSchema = yup.object({
   email: yup
@@ -26,14 +31,17 @@ const validationSchema = yup.object({
 });
 
 export function Login() {
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
       email: '',
       password: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values) => {
+      const {data} = await axios.post('/login', values)
+      localStorage.setItem('data',JSON.stringify(data))
+      dispatch(setUser(data))
     },
   });
 
