@@ -2,9 +2,7 @@ import React, { useState } from "react"
 import { IoSettingsOutline } from "react-icons/io5"
 import { BiLogOut } from "react-icons/bi"
 import { Link } from "react-router-dom"
-import { useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocalStorage } from "../../hooks/useLocalStorage"
 import { setUser } from "../../redux/slice/userSlice"
 
 import { useHistory } from "react-router-dom";
