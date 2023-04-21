@@ -7,6 +7,7 @@ import { AiFillEdit } from 'react-icons/ai';
 import Grid from '@mui/material/Grid';
 import { DeleteModal } from '../../modals/DeleteModal';
 import { AiFillDelete } from 'react-icons/ai';
+
 const StyledTable = styled(Table)`
     width: 90%;
     margin: 50px 0 0 50px;
@@ -28,6 +29,7 @@ const TRow = styled(TableRow)`
 
 
 export function AllBlog()  {
+    
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.post.data);
     const postStatus=useSelector((state) => state.post.status);
@@ -80,7 +82,7 @@ export function AllBlog()  {
                         <TableCell>{post.description.substring(0, 100)}</TableCell>
                         <TableCell>{post.user.name}</TableCell>
                         <TableCell>
-                            <Button color="secondary" variant="contained" style={{marginRight:10}} component={Link} to={`/edit/${post._id}`}><AiFillEdit/></Button>
+                            <Button color="secondary" variant="contained" style={{marginRight:10}} component={Link} to={`/edit/post`}><AiFillEdit/></Button>
                             <Button color="error" variant="contained" onClick={() => deleteUserData(post._id)}><AiFillDelete/></Button> 
                         </TableCell>
                     </TRow>
