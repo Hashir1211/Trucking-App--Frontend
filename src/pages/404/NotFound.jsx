@@ -2,7 +2,8 @@ import React from 'react'
 import { Box } from '@mui/material'
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-
+import {Button} from '@mui/material';
+import { Link } from "react-router-dom"
 export const NotFound = () => {
   return (
     <Box
@@ -24,7 +25,9 @@ export const NotFound = () => {
       <Typography variant="h5" align="center" color="text.secondary" paragraph>
       Expected Page does not exist
       </Typography>
-    </Container>
+      
+      <Box textAlign='center'><Link to='/' variant='button' color='secondary'>Head to Home</Link></Box></Container>
+    
   </Box>
   )
 }

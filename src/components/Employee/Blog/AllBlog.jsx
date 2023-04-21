@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-
 import { Table, TableHead, TableCell, TableRow, TableBody, Button, styled } from '@mui/material'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchPosts } from '../../../redux/slice/postSlice';
+
 const StyledTable = styled(Table)`
     width: 90%;
     margin: 50px 0 0 50px;
@@ -24,28 +25,32 @@ const TRow = styled(TableRow)`
 
 
 export function AllBlog()  {
-    const [posts, setPost] = useState([]);
-    
+    const dispatch = useDispatch()
+    const posts = useSelector((state) => state.post.data);
+    const postStatus=useSelector((state) => state.post.status);
+
     useEffect(() => {
         getAllUsers()
-    }, []);
+    }, [dispatch]);
 
     const deleteUserData = async (id) => {
         // await deleteUser(id);
-     
     }
 
     const getAllUsers = async () => {
-        const {data} = await axios.get('/posts'); 
-        console.log(data)
-        setPost(data)
-       
+        dispatch(fetchPosts());
+    }
+    if (postStatus!=='succeeded'){
+        return (
+            <div>Loading</div>
+        )
     }
 
     return (
         <StyledTable>
             <TableHead>
                 <THead>
+                    <TableCell>Image</TableCell>
                     <TableCell>Title</TableCell>
                     <TableCell>Description</TableCell>
                     <TableCell>Author</TableCell>
@@ -55,8 +60,9 @@ export function AllBlog()  {
             <TableBody>
                 {posts.map((post) => (
                     <TRow key={post._id}>
+                        <TableCell><div className='employeeBlogcontainer'><img  src={post.image}/></div></TableCell>
                         <TableCell>{post.title}</TableCell>
-                        <TableCell>{post.description}</TableCell>
+                        <TableCell>{post.description.substring(0, 100)}</TableCell>
                         <TableCell>{post.user.name}</TableCell>
                         <TableCell>
                             <Button color="primary" variant="contained" style={{marginRight:10}} component={Link} to={`/edit/${post._id}`}>Edit</Button>

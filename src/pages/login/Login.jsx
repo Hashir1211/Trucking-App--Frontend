@@ -15,6 +15,7 @@ import * as yup from 'yup';
 import {setUser} from '../../redux/slice/userSlice'
 import { useDispatch } from 'react-redux';
 
+
 import { useHistory } from "react-router-dom";
 
 const validationSchema = yup.object({
@@ -41,7 +42,7 @@ export function Login() {
     onSubmit: async (values) => {
       const {data} = await axios.post('/login', values)
       localStorage.setItem('data',JSON.stringify(data))
-      dispatch(setUser(data))
+      dispatch(setUser(data)) 
       history.push('/')
     },
   });

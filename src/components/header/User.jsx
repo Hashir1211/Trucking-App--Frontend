@@ -20,7 +20,7 @@ export const User = () => {
   const handleLogOut=(e)=>{
    dispatch(setUser(null))
    localStorage.removeItem('data');
-   history.push('/home')
+   history.push('/')
   }
  
   
