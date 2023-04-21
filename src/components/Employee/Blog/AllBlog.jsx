@@ -3,7 +3,10 @@ import { Table, TableHead, TableCell, TableRow, TableBody, Button, styled } from
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../../../redux/slice/postSlice';
-
+import { AiFillEdit } from 'react-icons/ai';
+import Grid from '@mui/material/Grid';
+import { DeleteModal } from '../../modals/DeleteModal';
+import { AiFillDelete } from 'react-icons/ai';
 const StyledTable = styled(Table)`
     width: 90%;
     margin: 50px 0 0 50px;
@@ -28,13 +31,15 @@ export function AllBlog()  {
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.post.data);
     const postStatus=useSelector((state) => state.post.status);
-
+    const [open, setOpen] =useState(false);
+    const [deleteId, setDeleteId]= useState('');
     useEffect(() => {
         getAllUsers()
     }, [dispatch]);
 
     const deleteUserData = async (id) => {
-        // await deleteUser(id);
+        setOpen(true)
+        setDeleteId(id)
     }
 
     const getAllUsers = async () => {
@@ -47,14 +52,24 @@ export function AllBlog()  {
     }
 
     return (
+
+     <>
+        <Grid container>
+              <Grid item>
+                <Link to="/create/post" >
+                 Do you want to create a new post
+                </Link>
+              </Grid>
+            </Grid>
         <StyledTable>
+       
             <TableHead>
                 <THead>
                     <TableCell>Image</TableCell>
                     <TableCell>Title</TableCell>
                     <TableCell>Description</TableCell>
                     <TableCell>Author</TableCell>
-                    <TableCell></TableCell>
+                    <TableCell>Actions</TableCell>
                 </THead>
             </TableHead>
             <TableBody>
@@ -65,13 +80,15 @@ export function AllBlog()  {
                         <TableCell>{post.description.substring(0, 100)}</TableCell>
                         <TableCell>{post.user.name}</TableCell>
                         <TableCell>
-                            <Button color="primary" variant="contained" style={{marginRight:10}} component={Link} to={`/edit/${post._id}`}>Edit</Button>
-                            <Button color="secondary" variant="contained" onClick={() => deleteUserData(post._id)}>Delete</Button> 
+                            <Button color="secondary" variant="contained" style={{marginRight:10}} component={Link} to={`/edit/${post._id}`}><AiFillEdit/></Button>
+                            <Button color="error" variant="contained" onClick={() => deleteUserData(post._id)}><AiFillDelete/></Button> 
                         </TableCell>
                     </TRow>
                 ))}
             </TableBody>
         </StyledTable>
+        <DeleteModal openModel={open} setOpenModel={setOpen} text='post' deleteId={deleteId} />
+        </>
     )
 }
 

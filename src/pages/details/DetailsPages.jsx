@@ -14,7 +14,6 @@ export const DetailsPages = () => {
 
   useEffect(() => {
     let blogs = blog.find((blogs) => blogs.id === parseInt(id))
-    console.log(blogs)
     if (blogs) {
       setBlogs(blogs)
     }

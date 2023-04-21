@@ -13,7 +13,7 @@ import { NotFound } from "./pages/404/NotFound"
 import {Auth} from "./components/Auth/Auth"
 import './config/axios'
 import {AllBlog} from './components/Employee/Blog/AllBlog'
-
+import {AddBlog} from './components/Employee/Blog/AddBlog'
 const App = () => {
   return (
     <>
@@ -30,6 +30,7 @@ const App = () => {
 
 
           <Route exact path ='/manage/post' render={(props) => <Auth {...props} childComponent={AllBlog} />}/>
+          <Route exact path ='/create/post' render={(props) => <Auth {...props} childComponent={AddBlog} />}/>
 
 
 

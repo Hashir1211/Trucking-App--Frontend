@@ -3,15 +3,12 @@ import axios from 'axios';
 // Set the baseURL for your API
 axios.defaults.baseURL = 'http://localhost:8000';
 
-const authRoute= ['/posts']
+const authRoute= ['/signup' ,'/login']
 // Define a request interceptor
 axios.interceptors.request.use(
   function (config) {
-    if (!authRoute.includes(config.url))
+    if (authRoute.includes(config.url))
     return config;
-    // Do something before sending the request
-  
-    // config.headers.Authorization = `{localStorage.getItem('token')}`;
     const data= JSON.parse(localStorage.getItem('data'));
     config.headers.Authorization = data.accessToken;
     return config;

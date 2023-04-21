@@ -24,7 +24,6 @@ const postSlice = createSlice({
       // Handle fulfilled state
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        console.log(action)
         state.data = action.payload;
       })
       // Handle rejected state
