@@ -1,19 +1,15 @@
-import { FormGroup, FormControl, InputLabel, Input, Button, styled ,FormHelperText  } from '@mui/material';
+import { FormGroup, FormControl, InputLabel, Input, Button, styled, FormHelperText } from '@mui/material';
 import { useHistory } from 'react-router-dom';
+import { useFormik } from 'formik';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import * as yup from 'yup';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { useFormik } from 'formik';
-const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
-const FILE_SIZE_LIMIT = 5 * 1024 * 1024; // 5 MB
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
-
-
-
-
+const types = ['Poor scheduling', 'Compensation', 'Mile inconsistency', 'Tractor mechanical breakdown issues']
 const Container = styled(FormGroup)`
     width: 50%;
     margin: 5% 0 0 25%;
@@ -30,38 +26,25 @@ const validationSchema = yup.object({
         .string('Enter the  description')
         .required('Description is required')
         .min(30, 'Description must be at least 10 characters'),
+        type: yup
+        .string('Enter the  type')
+        .required('Type is required')
 
 });
 
-export function  EditBlog () {
-    const { id } = useParams();
-    const navigate = useHistory();
-    const [initialValues, setInitialValues]= useState({ title: '', description: '' , image: '' }); 
+export const AddTicket = () => {
 
-    useEffect(() => {
-    const fetchPost= async()=>{
-    const {data}= await axios.get(`/posts/${id}`)
-    setInitialValues(data)
-    }
-
-    fetchPost()
-    }, [])
-
+    let navigate = useHistory();
     const formik = useFormik({
-        initialValues:initialValues,
-        enableReinitialize: true,
+        initialValues: {
+            title: '',
+            description: '',
+            type: ''
+        },
         validationSchema: validationSchema,
-        onSubmit: async(values) => {
-       const {_id, title , description , file} = values
-       const body= {title, description}; 
-       const {data}= await axios.put(`/posts/update/${_id}`, body);
-       if (file){
-        const body = {id : _id, file : file};
-        const {data : result} = await axios.post('/posts/file/upload', body ,
-        {headers: { 'Content-Type': 'multipart/form-data'}} )
-      
-       }
-       navigate.push('/manage/post')
+        onSubmit: async (values) => {
+            const {data}  = await axios.post('/tickets/create', values)
+            navigate.push('/manage/ticket')
         },
     });
 
@@ -70,22 +53,6 @@ export function  EditBlog () {
             mb: 100
         }}>
             <Box component="form" onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
-                <FormControl fullWidth margin="normal" size="small">
-                    <InputLabel htmlFor="image">Image</InputLabel>
-                    <Input
-                        fullWidth
-                        id="file"
-                        name="file"
-                        type="file"
-                        onChange={(event) => {
-                            const file = event.currentTarget.files[0];
-                            const fileName = file.name.replace(/\s/g, ''); 
-                            formik.setFieldValue("file", new File([file], fileName, { type: file.type }));
-                          }}
-                        
-                    />
-                </FormControl>
-
                 <TextField
                     fullWidth
                     id="title"
@@ -98,6 +65,29 @@ export function  EditBlog () {
                     margin='normal'
                     size='small'
                 />
+                   <FormControl fullWidth >
+                    <InputLabel id="demo-multiple-name-label">Service</InputLabel>
+                    <Select
+                        id="type"
+                        name='type'
+                        value={formik.values.type}
+                        onChange={formik.handleChange}
+                        error={formik.touched.type && Boolean(formik.errors.type)}
+                        helpertext={formik.touched.type && formik.errors.type}
+                        input={<OutlinedInput label="Type" />
+
+                        }
+                    >
+                        {types.map((name) => (
+                            <MenuItem
+                                key={name}
+                                value={name}
+                            >
+                                {name}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
                 <TextField
                     fullWidth
                     id="description"
@@ -113,17 +103,17 @@ export function  EditBlog () {
                     multiline
                     rows={5}
                 />
+             
                 <Button
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                 >
-                   Update Post
+                    Create Ticket
                 </Button>
 
             </Box>
         </Container>
     )
 }
-

@@ -15,6 +15,8 @@ import './config/axios'
 import {AllBlog} from './components/Employee/Blog/AllBlog'
 import {AddBlog} from './components/Employee/Blog/AddBlog'
 import { EditBlog } from "./components/Employee/Blog/EditBlog"
+import { AllTickets } from "./components/Employee/Ticket/AllTicket"
+import { AddTicket } from "./components/Employee/Ticket/AddTicket"
 const App = () => {
   return (
     <>
@@ -33,6 +35,9 @@ const App = () => {
           <Route exact path ='/manage/post' render={(props) => <Auth {...props} childComponent={AllBlog} />}/>
           <Route exact path ='/create/post' render={(props) => <Auth {...props} childComponent={AddBlog} />}/>
           <Route exact path ='/edit/post/:id' render={(props) => <Auth {...props} childComponent={EditBlog} />}/>
+
+          <Route exact path ='/manage/ticket' render={(props) => <Auth {...props} childComponent={AllTickets} />}/>
+          <Route exact path ='/create/ticket' render={(props) => <Auth {...props} childComponent={AddTicket} />}/>
 
 
 

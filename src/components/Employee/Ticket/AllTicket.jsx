@@ -1,3 +1,5 @@
+
+
 import { useState, useEffect } from 'react';
 import { Table, TableHead, TableCell, TableRow, TableBody, Button, styled } from '@mui/material'
 import { Link } from 'react-router-dom';
@@ -11,13 +13,14 @@ import { setUser } from '../../../redux/slice/userSlice';
 
 import axios from 'axios';
 const StyledTable = styled(Table)`
-    width: 90%;
+    width: 95%;
     margin: 50px 0 0 50px;
 `;
 
 const THead = styled(TableRow)`
     & > th {
         font-size: 20px;
+        font-weight: bold;
         background: #000000;
         color: #FFFFFF;
     }
@@ -30,7 +33,7 @@ const TRow = styled(TableRow)`
 `;
 
 
-export function AllBlog()  {
+export function AllTickets()  {
     
     const dispatch = useDispatch()
     const [posts, setPosts]= useState([])
@@ -53,12 +56,12 @@ export function AllBlog()  {
     }
 
     const getEmployeePost= async()=>{
-        const {data}= await axios.get("/posts/employee")
+        const {data}= await axios.get("/tickets")
         setPosts(data)
     }
 
     const getAdmin = async () => {
-      const {data}= await axios.get("/posts")
+      const {data}= await axios.get("/tickets")
       setPosts(data);
     }
 
@@ -70,8 +73,8 @@ export function AllBlog()  {
             pt:5
         }}>
               <Grid item>
-                <Link to="/create/post" >
-                 Do you want to create a new post
+                <Link to="/create/ticket" >
+                 Do you want to create a new Ticket
                 </Link>
               </Grid>
             </Grid>
@@ -79,23 +82,25 @@ export function AllBlog()  {
        
             <TableHead>
                 <THead>
-                    <TableCell>Image</TableCell>
                     <TableCell>Title</TableCell>
                     <TableCell>Description</TableCell>
-                    <TableCell>Author</TableCell>
+                    <TableCell>Type</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Allocation</TableCell>
                     <TableCell>Actions</TableCell>
                 </THead>
             </TableHead>
             <TableBody>
                 {posts.map((post) => (
                     <TRow key={post._id}>
-                        <TableCell><div className='employeeBlogcontainer'><img  src={post.image}/></div></TableCell>
                         <TableCell>{post.title}</TableCell>
                         <TableCell>{post.description.substring(0, 100)}</TableCell>
-                        <TableCell>{post.user.name}</TableCell>
+                        <TableCell>{post.type}</TableCell>
+                        <TableCell>{post.status}</TableCell>
+                        <TableCell>{post.user?.name}</TableCell>
                         <TableCell>
-                            <Button color="secondary" variant="contained" style={{marginRight:10}} component={Link} to={`/edit/post/${post._id}`}><AiFillEdit/></Button>
-                            <Button color="error" variant="contained" onClick={() => deleteUserData(post._id)}><AiFillDelete/></Button> 
+                        <Button color="secondary" variant="contained" style={{marginRight:10}} component={Link} to={`/edit/post/${post._id}`}><AiFillEdit/></Button>
+                        <Button color="error" variant="contained" onClick={() => deleteUserData(post._id)}><AiFillDelete/></Button> 
                         </TableCell>
                     </TRow>
                 ))}

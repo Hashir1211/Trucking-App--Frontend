@@ -50,7 +50,7 @@ export const User = () => {
                     <h4>Manage Blog Posts</h4>
                   </button>
                 </Link>
-                <Link to='/manage/tickets'>
+                <Link to='/manage/ticket'>
                   <button className='box'>
                     <IoSettingsOutline className='icon' />
                     <h4>Manage Tickets</h4>
