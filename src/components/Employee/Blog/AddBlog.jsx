@@ -6,7 +6,8 @@ import TextField from '@mui/material/TextField';
 import * as yup from 'yup';
 import axios from 'axios';
 
-
+import { useDispatch } from 'react-redux';
+import { fetchPosts } from '../../../redux/slice/postSlice';
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
 const FILE_SIZE_LIMIT = 5 * 1024 * 1024; // 5 MB
 const Container = styled(FormGroup)`
@@ -37,7 +38,7 @@ const validationSchema = yup.object({
 });
 
 export const AddBlog = () => {
-
+    const dispatch= useDispatch()
     let navigate = useHistory();
     const formik = useFormik({
         initialValues: {
@@ -53,6 +54,8 @@ export const AddBlog = () => {
             const body = {id : data, file : file};
             const {data : result} = await axios.post('/posts/file/upload', body ,
             {headers: { 'Content-Type': 'multipart/form-data'}} )
+
+            dispatch(fetchPosts())
             navigate.push('/manage/post')
         },
     });

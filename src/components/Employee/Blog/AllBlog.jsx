@@ -45,7 +45,7 @@ export function AllBlog()  {
         }
         getEmployeePost()
         return 
-    }, [dispatch]);
+    }, [open]);
 
     const deleteUserData = async (id) => {
         setOpen(true)

@@ -7,30 +7,31 @@ import { AiOutlineDelete } from "react-icons/ai"
 import { useParams } from "react-router-dom"
 import { useEffect } from "react"
 import { blog } from "../../assets/data/data"
+import { useSelector } from "react-redux"
+
 
 export const DetailsPages = () => {
   const { id } = useParams()
   const [blogs, setBlogs] = useState({})
+  const posts  = useSelector(state => state.post.data?.find(post => post._id === (id)))
+  
+  if (!posts) {
+    return <div>Loading...</div>;
+  }
 
-  useEffect(() => {
-    let blogs = blog.find((blogs) => blogs.id === parseInt(id))
-    if (blogs) {
-      setBlogs(blogs)
-    }
-  }, [])
 
   return (
     <>
-      {blogs ? (
+      {posts ? (
         <section className='singlePage'>
           <div className='container'>
             <div className='left'>
-              <img src={blogs.cover} alt='' />
+              <img src={posts?.image} alt='' />
             </div>
             <div className='right'>
-              <h1>{blogs.title}</h1>
-              <p>{blogs.desc}</p>
-              <p>Author: Sunil</p>
+              <h1>{posts.title}</h1>
+              <p>{posts.description}</p>
+              <p>Author: {posts.user.name}</p>
             </div>
           </div>
         </section>

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Footer } from "./components/footer/Footer"
 import { Header } from "./components/header/Header"
 import { Home } from "./pages/home/Home"
@@ -17,7 +17,16 @@ import {AddBlog} from './components/Employee/Blog/AddBlog'
 import { EditBlog } from "./components/Employee/Blog/EditBlog"
 import { AllTickets } from "./components/Employee/Ticket/AllTicket"
 import { AddTicket } from "./components/Employee/Ticket/AddTicket"
+import { useDispatch } from "react-redux"
+import { fetchPosts } from "./redux/slice/postSlice"
+
+
 const App = () => {
+  const dispatch= useDispatch()
+  useEffect(() => {
+  dispatch(fetchPosts())
+  }, [])
+  
   return (
     <>
       <Router>

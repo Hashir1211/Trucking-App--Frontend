@@ -7,6 +7,11 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
+
+import { Dispatch } from 'react';
+import { fetchPosts } from '../../../redux/slice/postSlice';
+import { useDispatch } from 'react-redux';
+
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
 const FILE_SIZE_LIMIT = 5 * 1024 * 1024; // 5 MB
 
@@ -34,6 +39,7 @@ const validationSchema = yup.object({
 });
 
 export function  EditBlog () {
+    const dispatch= useDispatch()
     const { id } = useParams();
     const navigate = useHistory();
     const [initialValues, setInitialValues]= useState({ title: '', description: '' , image: '' }); 
@@ -61,6 +67,7 @@ export function  EditBlog () {
         {headers: { 'Content-Type': 'multipart/form-data'}} )
       
        }
+       dispatch(fetchPosts())
        navigate.push('/manage/post')
         },
     });
