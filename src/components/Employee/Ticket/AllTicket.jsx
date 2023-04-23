@@ -35,7 +35,7 @@ const TRow = styled(TableRow)`
         font-size: 18px
     }
 `;
-const services =['pending', 'working', 'resolved'];
+const services =['pending', 'working', 'completed', 'resolved'];
 
 export function AllTickets() {
 

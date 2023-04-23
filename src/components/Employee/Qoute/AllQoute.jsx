@@ -53,7 +53,6 @@ export function AllQoute()  {
                     <TableCell>Name</TableCell>
                     <TableCell>Email</TableCell>
                     <TableCell>Address</TableCell>
-
                     <TableCell>Service</TableCell>
                 
                 </THead>
@@ -64,7 +63,6 @@ export function AllQoute()  {
                          <TableCell>{post.name}</TableCell>
                         <TableCell>{post.email}</TableCell>
                         <TableCell>{post.address }</TableCell>
-
                         <TableCell>{post.service}</TableCell>
                     </TRow>
                 ))}
