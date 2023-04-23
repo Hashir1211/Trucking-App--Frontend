@@ -24,9 +24,14 @@ export function DeleteModal  ({openModel, text , setOpenModel, deleteId})  {
     const dispatch = useDispatch()
     const handleClose = () => setOpenModel(false);
     const handleSucess=async ()=>{
+        if (text==='post'){
         const {data}= await axios.delete(`/posts/delete/${deleteId}`)
         dispatch(fetchPosts());
-        setOpenModel(false);
+        setOpenModel(false);}
+        else{
+          const {data}= await axios.delete(`/tickets/delete/${deleteId}`)
+          setOpenModel(false);
+        }
     }
   return (
     <div>

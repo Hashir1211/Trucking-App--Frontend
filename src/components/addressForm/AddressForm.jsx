@@ -66,7 +66,7 @@ export default function AddressForm() {
         const body = {...values , name: values.firstName + " " + values.lastName}
         try{
           const {data} = await axios.post('/qoutes/create' , body);
-          history.push("/home");
+          history.push("/");
         }
         catch(e){
           console.log(e);

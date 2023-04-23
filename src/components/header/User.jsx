@@ -56,6 +56,18 @@ export const User = () => {
                     <h4>Manage Tickets</h4>
                   </button>
                 </Link>
+                <Link to='/register'>
+                  <button className='box'>
+                    <IoSettingsOutline className='icon' />
+                    <h4>Register User</h4>
+                  </button>
+                </Link>
+                <Link to='/manage/qoute'>
+                  <button className='box'>
+                    <IoSettingsOutline className='icon' />
+                    <h4>View Qoutes</h4>
+                  </button>
+                </Link>
                 <button className='box' onClick={handleLogOut} >
                   <BiLogOut className='icon' />
                   <h4>Log Out</h4>

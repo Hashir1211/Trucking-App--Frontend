@@ -54,6 +54,7 @@ export function AllBlog()  {
 
     const getEmployeePost= async()=>{
         const {data}= await axios.get("/posts/employee")
+        debugger;
         setPosts(data)
     }
 

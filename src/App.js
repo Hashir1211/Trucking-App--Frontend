@@ -17,14 +17,17 @@ import {AddBlog} from './components/Employee/Blog/AddBlog'
 import { EditBlog } from "./components/Employee/Blog/EditBlog"
 import { AllTickets } from "./components/Employee/Ticket/AllTicket"
 import { AddTicket } from "./components/Employee/Ticket/AddTicket"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { fetchPosts } from "./redux/slice/postSlice"
-
+import { AllQoute } from "./components/Employee/Qoute/AllQoute"
 
 const App = () => {
+  const user = useSelector((state) => state.user);
   const dispatch= useDispatch()
   useEffect(() => {
-  dispatch(fetchPosts())
+  
+      dispatch(fetchPosts())
+
   }, [])
   
   return (
@@ -47,6 +50,8 @@ const App = () => {
 
           <Route exact path ='/manage/ticket' render={(props) => <Auth {...props} childComponent={AllTickets} />}/>
           <Route exact path ='/create/ticket' render={(props) => <Auth {...props} childComponent={AddTicket} />}/>
+
+          <Route exact path ='/manage/qoute' render={(props) => <Auth {...props} childComponent={AllQoute} />}/>
 
 
 

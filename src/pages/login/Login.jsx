@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -17,20 +17,20 @@ import { useDispatch } from 'react-redux';
 
 
 import { useHistory } from "react-router-dom";
+import { useState } from 'react';
 
 const validationSchema = yup.object({
   email: yup
     .string('Enter your email')
-    .email('Enter a valid email')
     .required('Email is required'),
   password: yup
     .string('Enter your password')
-    .min(8, 'Password should be of minimum 8 characters length')
     .required('Password is required'),
 
 });
 
 export function Login() {
+  const [error , setError]= useState(false)
   const history = useHistory();
   const dispatch = useDispatch();
   const formik = useFormik({
@@ -40,10 +40,14 @@ export function Login() {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
+      try{
       const {data} = await axios.post('/login', values)
       localStorage.setItem('data',JSON.stringify(data))
       dispatch(setUser(data)) 
-      history.push('/')
+      history.push('/')}
+      catch(e){
+        setError(true)
+      }
     },
   });
 
@@ -64,7 +68,7 @@ export function Login() {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Log in
           </Typography>
           <Box  component="form"   onSubmit={formik.handleSubmit} sx={{ mt: 3 }}>
             <TextField
@@ -96,6 +100,8 @@ export function Login() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+
+            {error && <div>Invalid Email or Password was entered</div>}
           <Button
               type="submit"
               fullWidth
@@ -104,13 +110,7 @@ export function Login() {
             >
                 Sign In
             </Button>
-            <Grid container>
-              <Grid item>
-                <Link to="/register" >
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
+
           </Box>
        
         </Box>
