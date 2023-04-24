@@ -6,17 +6,14 @@ import { RiInstagramFill } from "react-icons/ri"
 export const Footer = () => {
   return (
     <>
-      <footer className='boxItems'>
-        <div className='container flex'>
-          <p>Cartsy Medicine - All right reserved - Design & Developed by RedQ, Inc</p>
-          <div className='social'>
-            <BsFacebook className='icon' />
-            <RiInstagramFill className='icon' />
-            <AiFillTwitterCircle className='icon' />
-            <AiFillLinkedin className='icon' />
-          </div>
-        </div>
-      </footer>
+     <footer id="footer">
+    <i className=" icons twit fab fa-twitter"></i>
+    <i className=" icons fb fab fa-facebook-f"></i>
+    <i className=" icons insta fab fa-instagram"></i>
+    <i className=" icons mail fas fa-envelope"></i>
+  <p>© Copyright 2023</p>
+
+  </footer>
     </>
   )
 }

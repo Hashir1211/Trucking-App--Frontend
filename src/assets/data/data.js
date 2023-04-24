@@ -11,8 +11,8 @@ export const nav = [
   },
   {
     id: 4,
-    text: "Get A Qoute",                // todo Get a qoute for customer and Tickets for Admin and Empo
-    url: "/qoute",
+    text: "Get A Quote",                // todo Get a qoute for customer and Tickets for Admin and Empo
+    url: "/quote",
   },
   {
     id : 5, 

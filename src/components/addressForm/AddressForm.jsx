@@ -15,37 +15,37 @@ const services =['Full-service moving company', 'Hourly moving & packing service
 
   const validationSchema = yup.object({
     firstName: yup
-    .string('Enter your name')
-    .required('Name is required'),
+    .string('Enter your First Name')
+    .required('First Name is required'),
 
     lastName: yup
-    .string('Enter your email')
-    .required('Name is required'),
+    .string('Enter your Last Name')
+    .required('Last Name is required'),
 
     email: yup
-    .string('Enter your email')
+    .string('Enter your Enter')
     .email('Enter a valid email')
     .required('Email is required'),
 
     service: yup
-    .string('Enter your service')
-    .required('service is required'),
+    .string('Enter your Service')
+    .required('Service is required'),
 
     address: yup
-    .string('Enter your address')
-    .required('address is required'),
+    .string('Enter your Address')
+    .required('Address is required'),
 
     city: yup
-    .string('Enter your city')
-    .required('city is required'),
+    .string('Enter your City')
+    .required('City is required'),
 
     state: yup
-    .string('Enter your state')
-    .required('city is required'),
+    .string('Enter your State')
+    .required('State is required'),
 
     zip: yup
-    .string('Enter your state')
-    .required('zip/postcode is required'),
+    .string('Enter your zip')
+    .required('Zip/Postcode is required'),
   });
 
 export default function AddressForm() {
@@ -138,7 +138,6 @@ export default function AddressForm() {
           value={formik.values.service}
           onChange={formik.handleChange}
           error={formik.touched.service && Boolean(formik.errors.service)}
-          helpertext={formik.touched.service && formik.errors.service}
           input={<OutlinedInput label="Service" />
         
         }
@@ -170,30 +169,28 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-         
-            id="city"
-            name="city"
-            label="City"
-            fullWidth
-            autoComplete="shipping address-level2"
-            variant="outlined"
-            value={formik.values.city}
-            onChange={formik.handleChange}
-            error={formik.touched.city && Boolean(formik.errors.city)}
-            helpertext={formik.touched.city && formik.errors.city}
+          id="state"
+          name="state"
+          label="State/Province/Region"
+          fullWidth
+          variant="outlined"
+          value={formik.values.state}
+          onChange={formik.handleChange}
+          error={formik.touched.state && Boolean(formik.errors.state)}
+          helperText={formik.touched.state && formik.errors.state}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="state"
-            name="state"
-            label="State/Province/Region"
+            id="city"
+            name="city"
+            label="City"
             fullWidth
             variant="outlined"
-            value={formik.values.state}
+            value={formik.values.city}
             onChange={formik.handleChange}
-            error={formik.touched.state && Boolean(formik.errors.state)}
-            helperText={formik.touched.state && formik.errors.state}
+            error={formik.touched.city && Boolean(formik.errors.city)}
+            helperText={formik.touched.city && formik.errors.city}
           />
         </Grid>
         <Grid item xs={12} sm={6}>

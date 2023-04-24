@@ -84,18 +84,11 @@ export function AllBlog() {
 
         <>
             <Grid container sx={{
-                pl: 70,
+                pl: 20,
                 pt: 5
             }}>
-                <Grid item>
-                    <Link to="/create/post" >
-                        Do you want to create a new post
-                    </Link>
-                </Grid>
-
-
-
-                <Grid item sx={{ pl: 70, }}>
+             
+                <Grid item >
                     <Autocomplete
 
                         value={value}
@@ -126,6 +119,15 @@ export function AllBlog() {
                         sx={{ width: 300 }}
                         renderInput={(params) => <TextField {...params} label="Search" />}
                     />
+                </Grid>
+                <Grid item sx={{
+                    pl : 50
+                }}  >
+                    <Button> 
+                    <Link to="/create/post" >
+                       Create A Post
+                    </Link></Button>
+                   
                 </Grid>
             </Grid>
             <StyledTable>

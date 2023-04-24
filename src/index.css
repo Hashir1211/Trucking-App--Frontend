@@ -145,3 +145,208 @@ footer .icon {
   height: 100%;
   object-fit: cover;
 }
+
+div.container-fluid{
+  padding: 1% 15%;
+  padding-bottom: 10%;
+}
+ body h1{
+  font-family: Coda;
+  font-size: 3rem ;
+  line-height: 1.5;
+}
+
+body h2{
+
+  font-family: "Coda";
+  font-size: 2.2rem;
+}
+
+
+nav.navbar{
+  padding:0 0 4.5rem;
+
+}
+a.navbar-brand{
+  font-family: Ubuntu;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+li.nav-item{
+  padding: 0 18px;
+}
+
+a.nav-link{
+  font-size: 1.1rem;
+  font-family: Montserrat;
+}
+
+button.download-button{
+  margin: 5% 3% 5% 0;
+}
+
+@media (max-width: 1028px){
+img.dogphone-img{
+  width: 60%;
+transform: rotate(0deg);
+  position: static;
+  margin-top: 3rem;
+
+}
+
+#title{
+  text-align: center;
+}
+}
+
+div.feature-box{
+  text-align: center;
+  font-family: monserrat;
+}
+
+
+.col-lg-4 h3{
+  font-family: cursive;
+  margin-top: 5%;
+}
+
+.col-lg-4 p{
+  color: #8f8f8f;
+}
+
+div.icon{
+  margin-top: 10%;
+  color: #d62323;
+}
+
+div.icon:hover{
+  color: #991919;
+}
+
+#features{
+
+  padding: 12% 15%;
+  background-color: #fff;
+  position: relative;
+  z-index: +1;
+}
+
+#testimonials{
+  background-color: #e97b7b;
+  text-align: center;
+  color: white;
+  padding: 8% 8%;
+  display: inline-block;
+}
+.testimonial-img  {
+  padding: 3%;
+  width: 18%;
+  border-radius: 100%;
+}
+
+#press{
+  background-color: #e97b7b;
+  text-align: center;
+  padding: 3%;
+  position: relative;
+  bottom: 5rem;
+}
+
+.press-img{
+  width: 15%;
+  margin: 20px 20px 50px;
+}
+
+
+.fpbutton{
+
+  margin-top: 10rem;
+
+}
+.testimonial-text{
+  margin: 0 10rem 3rem;
+
+}
+
+#pricing{
+  text-align:center;
+  padding: 4rem;
+}
+body h2.pricing-h2{
+  margin-bottom: 3%;
+  color: #991919;
+}
+
+
+body div.pricing-col{
+  padding: 5% 5%;
+}
+
+#cta{
+  background: #e97b7b;
+  text-align: center;
+  padding: 8%;
+}
+
+h3.cta-h3{
+  font-size: 4rem;
+  font-family: Coda;
+  color: #fff;
+  line-height: 1.2;
+}
+
+button.btn-cta{
+  margin: 2% 1%;
+}
+
+#footer{
+  text-align: center;
+  padding: 6%;
+}
+
+body .twit{
+  color: #00acee;
+}
+
+body .fb{
+  color: #3b5998;
+}
+
+body .insta{
+  color: #9932CC;
+}
+
+body .icons{
+  margin: 1%;
+}
+
+.servicesPara{
+  text-align: left;
+}
+
+/* Top div CSS */
+
+.imageBox{
+  margin: 1rem;
+  width: 90%;
+}
+
+.headingContainer{
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  color:#991919;
+}
+
+.headingContainerh2{
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-bottom: 4rem;
+  color: #484548;
+}
+
+.card-header{
+ background-color: #ee9a9a;
+}

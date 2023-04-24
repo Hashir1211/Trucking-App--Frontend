@@ -29,7 +29,7 @@ const Container = styled(FormGroup)`
 const validationSchema = yup.object({
     title: yup
         .string('Enter the title')
-        .required('title is required')
+        .required('Title is required')
         .min(10, 'Title must be at least 10 characters'),
     description: yup
         .string('Enter the  description')

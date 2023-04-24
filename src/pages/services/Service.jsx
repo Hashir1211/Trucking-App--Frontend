@@ -26,13 +26,19 @@ export function Service() {
               component="h1"
               variant="h2"
               align="center"
-              color="text.primary"
+              color="#d62323"
+              fontFamily="revert"
               gutterBottom
             >
-             Services
+             Our Services
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Something short and leading about the Services below—its contents.
+            
+          </Container>
+          
+          <Container>
+            <Typography variant="h6" align="left" color="text.secondary" paragraph>
+            Our primary mission is to provide excellent service, and we ensure our pricing is transparent. We consider several factors before and during your move to deliver value at a fair price and ensure your needs are met.
+            The factors that affect your pricing include location, distance from the parking area, the time needed to complete the job, the number of movers we need for the crew, the number and size of items to be moved, and any assembly or disassembly needed.
             </Typography>
           </Container>
         </Box>

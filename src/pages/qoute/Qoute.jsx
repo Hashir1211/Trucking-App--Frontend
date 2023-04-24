@@ -19,10 +19,10 @@ export const Qoute = () => {
         component="h1"
         variant="h2"
         align="center"
-        color="text.primary"
+        color="#d62323"
         gutterBottom
       >
-       Get A Qoute
+       Get A Quote
       </Typography>
       <Typography variant="h5" align="center" color="text.secondary" paragraph>
         Something short and leading about the Qoute below—its contents.

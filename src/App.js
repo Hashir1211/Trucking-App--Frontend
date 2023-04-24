@@ -41,7 +41,7 @@ const App = () => {
           <Route exact path='/details/:id' component={DetailsPages} />
           <Route exact path ='/blog' component={Post}/>
           <Route exact path ='/services' component={Service}/>
-          <Route exact path ='/qoute' component={Qoute}/>   
+          <Route exact path ='/quote' component={Qoute}/>   
 
 
           <Route exact path ='/manage/post' render={(props) => <Auth {...props} childComponent={AllBlog} />}/>

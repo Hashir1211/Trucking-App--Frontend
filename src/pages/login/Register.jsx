@@ -1,8 +1,6 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { Link } from "react-router-dom"
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -11,14 +9,15 @@ import axios from 'axios';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { useHistory } from "react-router-dom";
+import { useState } from 'react';
 
 const validationSchema = yup.object({
   firstName: yup
   .string('Enter your first Name')
-  .required('Name is required'),
+  .required('First Name is required'),
   lastName: yup
   .string('Enter your last Name')
-  .required('Name is required'),
+  .required('Last Name is required'),
   email: yup
     .string('Enter your email')
     .email('Enter a valid email')
@@ -29,12 +28,13 @@ const validationSchema = yup.object({
     .required('Password is required'),
   phoneNumber: yup
     .number('Enter your contact Number')
-    .min(10, 'contact Number should be of minimum 8 characters length')
-    .required('contact Number is required'),
+    .min(10, 'Contact Number should be of minimum 8 characters length')
+    .required('Contact Number is required'),
 });
 
 
 export function Register() {
+  const [error , setError] = useState(false)
   const history = useHistory()
   const formik = useFormik({
     initialValues: {
@@ -52,6 +52,7 @@ export function Register() {
         history.push('/login')
       }
       catch (e){
+        setError(true)
         console.log(e)
       }
     },
@@ -154,6 +155,7 @@ export function Register() {
                 />
               </Grid>
             </Grid>
+            {error && <div>Email already Registered, enter any other email</div>}
             <Button
               type="submit"
               fullWidth

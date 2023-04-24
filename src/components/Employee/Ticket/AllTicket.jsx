@@ -37,6 +37,8 @@ const TRow = styled(TableRow)`
 `;
 const services =['pending', 'working', 'completed', 'resolved'];
 
+const userServices =['working', 'completed'];
+
 export function AllTickets() {
 
     const [posts, setPosts] = useState([])
@@ -93,13 +95,15 @@ export function AllTickets() {
 
         <>
             <Grid container sx={{
-                pl: 70,
-                pt: 5
+             pl: 20,
+             pt: 5
             }}>
-                <Grid item>
+                   <Grid item  >
+                    <Button> 
                     <Link to="/create/ticket" >
-                        Do you want to create a new Ticket
-                    </Link>
+                       Log A Ticket
+                    </Link></Button>
+                   
                 </Grid>
             </Grid>
             <StyledTable>
@@ -179,7 +183,24 @@ export function AllTickets() {
                                 <TableCell>{post.title}</TableCell>
                                 <TableCell>{post.description.substring(0, 100)}</TableCell>
                                 <TableCell>{post.type}</TableCell>
-                                <TableCell> {post.status}</TableCell>
+                                <TableCell>     <Select
+                                    id="service"
+                                    name='service'
+                                    input={<OutlinedInput label="Service" />
+
+                                    }
+                                    value={post.status}
+                                    onChange={(event) => handleChange(post._id, event , post.status)}
+                                >
+                                    {userServices.map((name) => (
+                                        <MenuItem
+                                            key={name}
+                                            value={name}
+                                        >
+                                            {name}
+                                        </MenuItem>
+                                    ))}
+                                </Select></TableCell>
                                 <TableCell>{post.user?.name}</TableCell>
                                 <TableCell>
                                   {!post.user && <Button color="secondary" variant="contained" style={{ marginRight: 10 }} onClick={() => assignTicket(post._id)}><AiFillEdit /></Button>}
