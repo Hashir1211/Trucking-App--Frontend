@@ -49,7 +49,7 @@ export function Register() {
       const body = {...values , name: values.firstName +" "+ values.lastName}
       try{
         const {data}= await axios.post('/signup',body);
-        history.push('/login')
+        history.push('/')
       }
       catch (e){
         setError(true)
