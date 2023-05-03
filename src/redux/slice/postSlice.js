@@ -3,7 +3,7 @@ import axios from 'axios'
 export const fetchPosts = createAsyncThunk(
   'posts',
   async (thunkAPI) => {
-    const {data} = await axios.get('/posts');
+    const {data} = await  axios.get('/posts');
     return data
   }
 )
